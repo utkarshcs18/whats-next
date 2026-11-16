@@ -1,8 +1,3 @@
-"""
-What's Next? - Deep Learning Next Word Predictor
-Aesthetic Light-Themed Web Frontend built with Streamlit
-"""
-
 import os
 import json
 import time
@@ -13,7 +8,6 @@ from predictor import NextWordPredictor, TF_AVAILABLE
 # Page Configuration
 st.set_page_config(
     page_title="What's Next? • LSTM Next Word Predictor",
-    page_icon="✨",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -229,9 +223,6 @@ if os.path.exists("model_metadata.json"):
         pass
 
 
-# ========================================================
-# HEADER SECTION
-# ========================================================
 status_badge = (
     '<span class="badge-ready">● Model Active (lstm_model.h5)</span>'
     if predictor.is_loaded else
@@ -267,12 +258,8 @@ if not predictor.is_loaded:
         """)
 
 
-# ========================================================
-# MAIN LAYOUT (2 Columns)
-# ========================================================
 col_left, col_right = st.columns([1.1, 0.9], gap="large")
 
-# ----------------- LEFT COLUMN: PREDICTION & GENERATION -----------------
 with col_left:
     st.markdown('<div class="card-box">', unsafe_allow_html=True)
     st.markdown('<div class="card-title">💡 Seed Prompt Input</div>', unsafe_allow_html=True)
@@ -346,7 +333,7 @@ with col_left:
         temperature = st.slider("Temperature / Creativity", min_value=0.1, max_value=1.5, value=0.7, step=0.1,
                                 help="Lower is deterministic and focused; higher is diverse and creative.")
 
-    if st.button("🚀 Generate Full Continuation", type="primary", use_container_width=True):
+    if st.button(" Generate Full Continuation", type="primary", use_container_width=True):
         if user_prompt.strip():
             with st.spinner("Generating sequence with LSTM..."):
                 generated = predictor.generate_sequence(user_prompt, n_words=n_words, temperature=temperature)
@@ -365,7 +352,6 @@ with col_left:
     st.markdown('</div>', unsafe_allow_html=True)
 
 
-# ----------------- RIGHT COLUMN: PROBABILITY DISTRIBUTION & SPECS -----------------
 with col_right:
     # Probability Distribution Card
     st.markdown('<div class="card-box">', unsafe_allow_html=True)
@@ -446,9 +432,7 @@ with col_right:
     st.markdown('</div>', unsafe_allow_html=True)
 
 
-# ========================================================
-# SIDEBAR
-# ========================================================
+
 with st.sidebar:
     st.markdown("### ⚙️ Model Settings")
 

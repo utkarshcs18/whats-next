@@ -9,3 +9,4 @@ model_metadata.json
 .venv
 env/
 venv/
+/.vscode

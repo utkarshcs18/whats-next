@@ -16,7 +16,6 @@ except ImportError:
 
 
 def clean_text(text: str) -> str:
-    """Preprocess user input: lowercase and remove punctuations."""
     if not text:
         return ""
     text = text.lower()
@@ -46,7 +45,6 @@ class NextWordPredictor:
         self._load()
 
     def _load(self):
-        """Loads trained artifacts if available."""
         if not os.path.exists(self.model_path):
             self.load_error = f"Model file '{self.model_path}' not found."
             return
@@ -84,10 +82,6 @@ class NextWordPredictor:
             self.is_loaded = False
 
     def predict_top_k(self, text: str, top_k: int = 5) -> list[dict]:
-        """
-        Predicts top-K likely next words with probabilities.
-        Returns list of dicts: [{'word': str, 'prob': float, 'pct': str}]
-        """
         cleaned = clean_text(text)
         if not cleaned:
             return []
@@ -122,9 +116,7 @@ class NextWordPredictor:
         return results
 
     def generate_sequence(self, seed_text: str, n_words: int = 5, temperature: float = 1.0) -> str:
-        """
-        Generates subsequent words sequentially from seed_text.
-        """
+
         cleaned_seed = seed_text.strip()
         current_text = cleaned_seed
 
@@ -160,7 +152,6 @@ class NextWordPredictor:
 
     # --- Built-in Fallback Demo Engine for Instant Testing before training ---
     def _fallback_predict_top_k(self, cleaned: str, top_k: int = 5) -> list[dict]:
-        """Provides heuristic quote completions so the UI can be explored immediately."""
         words = cleaned.split()
         last_word = words[-1] if words else ""
         last_two = " ".join(words[-2:]) if len(words) >= 2 else last_word

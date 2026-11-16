@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.h5
+*.pkl
+training_curve.png
+model_metadata.json
+.env
+.venv
+env/
+venv/
